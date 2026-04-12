@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cédric Ribier — Systèmes & Réseaux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e0a;
+  --bg2: #0f150f;
+  --bg3: #141a14;
+  --green: #00ff41;
+  --green-dim: #00c832;
+  --green-muted: #1a3d1a;
+  --green-glow: rgba(0,255,65,0.08);
+  --cyan: #00ffd5;
+  --amber: #ffb300;
+  --text: #c8d8c8;
+  --text-dim: #6a8a6a;
+  --border: rgba(0,255,65,0.12);
+  --border-bright: rgba(0,255,65,0.3);
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Syne', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Scanlines overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,14,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 0.05em;
+}
+
+.nav-logo span { color: var(--text-dim); }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::before {
+  content: '> ';
+  color: var(--green);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.nav-links a:hover { color: var(--green); }
+.nav-links a:hover::before { opacity: 1; }
+
+.lang-toggle {
+  background: none;
+  border: 1px solid var(--border-bright);
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: all 0.2s;
+}
+
+.lang-toggle:hover {
+  color: var(--green);
+  border-color: var(--green);
+  background: var(--green-glow);
+}
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.hero-prompt {
+  color: var(--text-dim);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-prompt::before {
+  content: '';
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero-name {
+  font-family: var(--sans);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-name .accent { color: var(--green); }
+
+.hero-title {
+  font-family: var(--mono);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--green-dim);
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-title .cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--green);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-desc {
+  color: var(--text);
+  max-width: 560px;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  font-size: 13px;
+}
+
+.hero-desc .fr { display: block; }
+.hero-desc .en { display: none; }
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(0,255,65,0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--border-bright);
+}
+
+.btn-secondary:hover {
+  background: var(--green-glow);
+  border-color: var(--green);
+  transform: translateY(-1px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.stat-item { }
+
+.stat-num {
+  font-family: var(--sans);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* SECTIONS */
+section {
+  padding: 6rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.section-tag {
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.section-tag::before { content: '// '; }
+
+.section-title {
+  font-family: var(--sans);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.skill-card {
+  background: var(--bg2);
+  padding: 1.5rem;
+  transition: background 0.2s;
+}
+
+.skill-card:hover { background: var(--bg3); }
+
+.skill-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.skill-icon {
+  width: 32px; height: 32px;
+  background: var(--green-muted);
+  border: 1px solid var(--border-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--green);
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.skill-card-title {
+  font-size: 13px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 10px;
+  padding: 3px 8px;
+  background: rgba(0,255,65,0.05);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+
+.skill-card:hover .tag {
+  border-color: var(--border-bright);
+  color: var(--text);
+}
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--green);
+  transform: scaleY(0);
+  transition: transform 0.2s;
+  transform-origin: bottom;
+}
+
+.project-card:hover {
+  border-color: var(--border-bright);
+  background: var(--bg3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.project-card:hover::before { transform: scaleY(1); }
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.project-name {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.project-status {
+  font-size: 10px;
+  padding: 2px 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-active {
+  background: rgba(0,255,65,0.1);
+  border: 1px solid rgba(0,255,65,0.3);
+  color: var(--green);
+}
+
+.status-wip {
+  background: rgba(255,179,0,0.1);
+  border: 1px solid rgba(255,179,0,0.3);
+  color: var(--amber);
+}
+
+.project-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.project-desc .fr { display: block; }
+.project-desc .en { display: none; }
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.stack-tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  background: var(--green-muted);
+  color: var(--green-dim);
+  letter-spacing: 0.05em;
+}
+
+.project-arrow {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  color: var(--text-dim);
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.project-card:hover .project-arrow {
+  color: var(--green);
+  transform: translate(2px, -2px);
+}
+
+/* ABOUT / FORMATION */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.about-block {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+}
+
+.about-block-title {
+  font-size: 11px;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-block-title::before { content: '$ '; }
+
+.timeline-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.timeline-title {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.timeline-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* CONTACT */
+#contact {
+  border-top: 1px solid var(--border);
+}
+
+.contact-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+  background: var(--bg2);
+}
+
+.contact-link:hover {
+  color: var(--green);
+  border-color: var(--border-bright);
+  background: var(--green-glow);
+}
+
+.contact-link-prefix {
+  color: var(--green);
+  font-size: 11px;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+
+footer span { color: var(--green); }
+
+/* FADE IN */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .about-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  section { padding: 4rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><span>~/</span>cedric-ribier</div>
+  <ul class="nav-links">
+    <li><a href="#competences" data-fr="Compétences" data-en="Skills">Compétences</a></li>
+    <li><a href="#projets" data-fr="Projets" data-en="Projects">Projets</a></li>
+    <li><a href="#formation" data-fr="Formation" data-en="About">Formation</a></li>
+    <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+  </ul>
+  <button class="lang-toggle" onclick="toggleLang()">EN</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:100%;padding-top:80px;">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-prompt" id="hero-prompt">reconversion IT · Caen, France</div>
+    <h1 class="hero-name">Cédric <span class="accent">Ribier</span></h1>
+    <div class="hero-title">
+      <span id="typed-text">Technicien Supérieur Systèmes & Réseaux</span><span class="cursor"></span>
+    </div>
+    <div class="hero-desc">
+      <span class="fr">En reconversion vers les métiers de l'IT, je me spécialise dans l'administration système, les réseaux et la sécurité. Ma progression passe par la pratique — labs GNS3, scripts d'automatisation et documentation technique structurée.</span>
+      <span class="en">Transitioning into IT, specializing in systems administration, networking and security. My progress is built on hands-on practice — GNS3 labs, automation scripts and structured technical documentation.</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#projets" class="btn btn-primary">
+        <span class="fr">Voir les projets</span>
+        <span class="en" style="display:none">View projects</span>
+        →
+      </a>
+      <a href="https://github.com/cedric-ribier" target="_blank" class="btn btn-secondary">
+        GitHub ↗
+      </a>
+      <a href="https://linkedin.com/in/cédric-ribier-3393b2301" target="_blank" class="btn btn-secondary">
+        LinkedIn ↗
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label fr">Labs GNS3</div>
+        <div class="stat-label en" style="display:none">GNS3 Labs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label fr">Services Linux déployés</div>
+        <div class="stat-label en" style="display:none">Linux Services</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">TSSR</div>
+        <div class="stat-label fr">Titre visé — 2026</div>
+        <div class="stat-label en" style="display:none">Target Cert — 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences" class="fade-in">
+  <div class="section-header">
+    <div class="section-tag fr">Compétences</div>
+    <div class="section-tag en" style="display:none">Skills</div>
+    <h2 class="section-title">
+      <span class="fr">Stack technique</span>
+      <span class="en" style="display:none">Tech stack</span>
+    </h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">NW</div>
+        <div class="skill-card-title">Réseau</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">GNS3</span>
+        <span class="tag">Cisco IOS</span>
+        <span class="tag">VLANs</span>
+        <span class="tag">ACL</span>
+        <span class="tag">OSPF</span>
+        <span class="tag">NAT</span>
+        <span class="tag">Routage inter-VLAN</span>
+        <span class="tag">Trunk dot1Q</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">SY</div>
+        <div class="skill-card-title">Système</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">Windows Server 2022</span>
+        <span class="tag">Active Directory</span>
+        <span class="tag">GPO</span>
+        <span class="tag">DHCP</span>
+        <span class="tag">Debian Trixie</span>
+        <span class="tag">SSH</span>
+        <span class="tag">AGDLP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">SC</div>
+        <div class="skill-card-title">Scripting</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">PowerShell</span>
+        <span class="tag">Bash</span>
+        <span class="tag">Cisco IOS</span>
+        <span class="tag">Automatisation AD</span>
+        <span class="tag">GPO Scripts</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">SE</div>
+        <div class="skill-card-title">Sécurité</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">Wazuh SIEM</span>
+        <span class="tag">pfSense</span>
+        <span class="tag">ACL multi-niveaux</span>
+        <span class="tag">DMZ</span>
+        <span class="tag">OpenVPN</span>
+        <span class="tag">Portail captif</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">SV</div>
+        <div class="skill-card-title">Services</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">Zabbix 7.4</span>
+        <span class="tag">PowerDNS</span>
+        <span class="tag">Kea DHCP</span>
+        <span class="tag">FOGProject PXE</span>
+        <span class="tag">GLPI</span>
+        <span class="tag">Nginx</span>
+        <span class="tag">PostgreSQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">VT</div>
+        <div class="skill-card-title">Virtualisation</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">GNS3</span>
+        <span class="tag">VirtualBox</span>
+        <span class="tag">VMware Fusion</span>
+        <span class="tag">Cisco 7200</span>
+        <span class="tag">IOSvL2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets" class="fade-in">
+  <div class="section-header">
+    <div class="section-tag fr">Projets</div>
+    <div class="section-tag en" style="display:none">Projects</div>
+    <h2 class="section-title">
+      <span class="fr">Labs & réalisations</span>
+      <span class="en" style="display:none">Labs & work</span>
+    </h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <a href="https://github.com/cedric-ribier/lab-gns3-security" target="_blank" class="project-card">
+      <div class="project-header">
+        <div class="project-name">lab-gns3-security</div>
+        <div class="project-status status-wip">
+          <span class="fr">En cours</span>
+          <span class="en" style="display:none">In progress</span>
+        </div>
+      </div>
+      <div class="project-desc">
+        <span class="fr">Infrastructure réseau segmentée avec pare-feu, DMZ, ACL multi-niveaux et supervision Wazuh SIEM. Routeurs Cisco 7200, switches IOSvL2, services Linux Debian.</span>
+        <span class="en">Segmented network infrastructure with firewall, DMZ, multi-level ACLs and Wazuh SIEM monitoring. Cisco 7200 routers, IOSvL2 switches, Linux Debian services.</span>
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">GNS3</span>
+        <span class="stack-tag">Cisco</span>
+        <span class="stack-tag">Wazuh</span>
+        <span class="stack-tag">Debian</span>
+        <span class="stack-tag">ACL</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/cedric-ribier/lab-gns3-TSSR" target="_blank" class="project-card">
+      <div class="project-header">
+        <div class="project-name">lab-gns3-TSSR</div>
+        <div class="project-status status-active">
+          <span class="fr">Réalisé</span>
+          <span class="en" style="display:none">Done</span>
+        </div>
+      </div>
+      <div class="project-desc">
+        <span class="fr">Infrastructure d'entreprise complète — Active Directory, VLANs, supervision Zabbix, portail captif pfSense, déploiement PXE FOGProject et automatisation PowerShell.</span>
+        <span class="en">Full enterprise infrastructure — Active Directory, VLANs, Zabbix monitoring, pfSense captive portal, FOGProject PXE deployment and PowerShell automation.</span>
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">AD DS</span>
+        <span class="stack-tag">Zabbix</span>
+        <span class="stack-tag">pfSense</span>
+        <span class="stack-tag">FOG</span>
+        <span class="stack-tag">PowerShell</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/cedric-ribier/Powershell-scripts" target="_blank" class="project-card">
+      <div class="project-header">
+        <div class="project-name">Powershell-scripts</div>
+        <div class="project-status status-wip">
+          <span class="fr">En cours</span>
+          <span class="en" style="display:none">In progress</span>
+        </div>
+      </div>
+      <div class="project-desc">
+        <span class="fr">Collection de scripts d'administration — création automatique de comptes AD depuis Excel, gestion des OUs multi-sites, forçage DHCP via GPO.</span>
+        <span class="en">Administration scripts collection — automatic AD account creation from Excel, multi-site OU management, DHCP enforcement via GPO.</span>
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">PowerShell</span>
+        <span class="stack-tag">Active Directory</span>
+        <span class="stack-tag">GPO</span>
+        <span class="stack-tag">Windows Server</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation" class="fade-in">
+  <div class="section-header">
+    <div class="section-tag fr">Formation</div>
+    <div class="section-tag en" style="display:none">About</div>
+    <h2 class="section-title">
+      <span class="fr">Parcours</span>
+      <span class="en" style="display:none">Background</span>
+    </h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-block">
+      <div class="about-block-title fr">Formation</div>
+      <div class="about-block-title en" style="display:none">Education</div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-title">Technicien Supérieur Systèmes & Réseaux</div>
+          <div class="timeline-sub">Studi · Nov 2025 → Juin 2026</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--text-dim)"></div>
+        <div>
+          <div class="timeline-title fr">Reconversion IT</div>
+          <div class="timeline-title en" style="display:none">Career transition into IT</div>
+          <div class="timeline-sub fr">Caen, Normandie</div>
+          <div class="timeline-sub en" style="display:none">Caen, Normandy — France</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-block">
+      <div class="about-block-title fr">Actuellement</div>
+      <div class="about-block-title en" style="display:none">Currently</div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-title fr">Déploiement services Linux</div>
+          <div class="timeline-title en" style="display:none">Deploying Linux services</div>
+          <div class="timeline-sub fr">DNS, DHCP, WEB, OpenVPN — Phase 4 lab GNS3</div>
+          <div class="timeline-sub en" style="display:none">DNS, DHCP, WEB, OpenVPN — GNS3 lab Phase 4</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-title fr">Intégration Wazuh SIEM</div>
+          <div class="timeline-title en" style="display:none">Wazuh SIEM integration</div>
+          <div class="timeline-sub fr">Collecte de logs · Règles de détection — Phase 5</div>
+          <div class="timeline-sub en" style="display:none">Log collection · Detection rules — Phase 5</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--text-dim)"></div>
+        <div>
+          <div class="timeline-title fr">Préparation CCNA</div>
+          <div class="timeline-title en" style="display:none">CCNA preparation</div>
+          <div class="timeline-sub fr">Certifications réseau Cisco</div>
+          <div class="timeline-sub en" style="display:none">Cisco networking certifications</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="fade-in">
+  <div class="section-header">
+    <div class="section-tag">Contact</div>
+    <h2 class="section-title">
+      <span class="fr">Me contacter</span>
+      <span class="en" style="display:none">Get in touch</span>
+    </h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-links">
+    <a href="https://github.com/cedric-ribier" target="_blank" class="contact-link">
+      <span class="contact-link-prefix">$</span> github.com/cedric-ribier
+    </a>
+    <a href="https://linkedin.com/in/cédric-ribier-3393b2301" target="_blank" class="contact-link">
+      <span class="contact-link-prefix">$</span> LinkedIn — Cédric Ribier
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>cedric-ribier</span> · Caen, France · TSSR 2026
+</footer>
+
+<script>
+// Lang toggle
+let lang = 'fr';
+function toggleLang() {
+  lang = lang === 'fr' ? 'en' : 'fr';
+  const btn = document.querySelector('.lang-toggle');
+  btn.textContent = lang === 'fr' ? 'EN' : 'FR';
+  document.querySelectorAll('.fr').forEach(el => el.style.display = lang === 'fr' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+}
+
+// Fade in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Typed effect
+const texts = {
+  fr: ['Technicien Supérieur Systèmes & Réseaux', 'Administration système & réseau', 'Sécurité · Automatisation · Labs GNS3'],
+  en: ['Systems & Network Engineer', 'Sysadmin & Network Administration', 'Security · Automation · GNS3 Labs']
+};
+let ti = 0, ci = 0, deleting = false;
+const el = document.getElementById('typed-text');
+function type() {
+  const arr = texts[lang];
+  const word = arr[ti % arr.length];
+  if (!deleting) {
+    el.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { deleting = true; setTimeout(type, 2000); return; }
+  } else {
+    el.textContent = word.slice(0, --ci);
+    if (ci === 0) { deleting = false; ti++; }
+  }
+  setTimeout(type, deleting ? 40 : 70);
+}
+type();
+</script>
+</body>
+</html>
