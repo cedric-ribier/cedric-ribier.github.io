@@ -622,7 +622,198 @@ footer span { color: var(--green); }
   transform: translateY(0);
 }
 
-/* RESPONSIVE */
+/* OUTILS */
+.tool-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.tool-tab {
+  background: none;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  top: 1px;
+}
+
+.tool-tab.active {
+  color: var(--green);
+  border-color: var(--border-bright);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--bg2);
+}
+
+.tool-tab:hover:not(.active) {
+  color: var(--text);
+  background: var(--green-glow);
+}
+
+.tool-panel { display: none; }
+.tool-panel.active { display: block; }
+
+.tool-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.tool-desc code {
+  color: var(--green);
+  background: var(--green-muted);
+  padding: 1px 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.form-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.form-group {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+}
+
+.form-section-label {
+  font-size: 10px;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.req {
+  color: var(--amber);
+  font-size: 9px;
+  margin-left: 6px;
+  border: 1px solid rgba(255,179,0,0.3);
+  padding: 1px 5px;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+.form-row:last-child { margin-bottom: 0; }
+
+.form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-field.full { flex: 2; }
+
+.form-field label {
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.form-field input,
+.form-field select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 6px 10px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder { color: var(--text-dim); opacity: 0.5; }
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: var(--green);
+  background: var(--bg);
+}
+
+.form-field select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2300c832'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+.tool-output-header {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 10px;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 1.5rem 0 0;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  padding: 8px 12px;
+  background: var(--bg2);
+}
+
+.tool-output-header span { flex: 1; }
+
+.copy-btn {
+  background: none;
+  border: 1px solid var(--border-bright);
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 10px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  color: var(--green);
+  border-color: var(--green);
+  background: var(--green-glow);
+}
+
+.tool-code {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--green-dim);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.8;
+  padding: 1.25rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0;
+  min-height: 120px;
+}
+
+.ps-param { color: var(--cyan); }
+.ps-val   { color: #c8d8a0; }
+.ps-cmd   { color: #fff; font-weight: 500; }
+.ps-fn    { color: var(--amber); }
+
+@media (max-width: 768px) {
+  .form-row { flex-direction: column; }
+  .form-field.full { flex: 1; }
+}
+
+
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .about-grid { grid-template-columns: 1fr; }
@@ -640,6 +831,7 @@ footer span { color: var(--green); }
     <li><a href="#projets" data-fr="Projets" data-en="Projects">Projets</a></li>
     <li><a href="#formation" data-fr="Formation" data-en="About">Formation</a></li>
     <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+    <li><a href="#outils" data-fr="Outils" data-en="Tools">Outils</a></li>
   </ul>
   <button class="lang-toggle" onclick="toggleLang()">EN</button>
 </nav>
@@ -958,6 +1150,128 @@ footer span { color: var(--green); }
   </div>
 </section>
 
+<!-- OUTILS -->
+<section id="outils" class="fade-in">
+  <div class="section-header">
+    <div class="section-tag fr">Outils</div>
+    <div class="section-tag en" style="display:none">Tools</div>
+    <h2 class="section-title">
+      <span class="fr">Générateurs PowerShell</span>
+      <span class="en" style="display:none">PowerShell Generators</span>
+    </h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- Onglets -->
+  <div class="tool-tabs">
+    <button class="tool-tab active" onclick="switchTab('new-aduser')">New-ADUser</button>
+  </div>
+
+  <!-- Panneau New-ADUser -->
+  <div id="tab-new-aduser" class="tool-panel">
+    <div class="tool-desc fr">Génère une commande <code>New-ADUser</code> avec les paramètres dans l'ordre conventionnel. Seuls les champs remplis apparaissent.</div>
+    <div class="tool-desc en" style="display:none">Generates a <code>New-ADUser</code> command with parameters in conventional order. Only filled fields appear.</div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <div class="form-section-label fr">// Identité <span class="req">obligatoire</span></div>
+        <div class="form-section-label en" style="display:none">// Identity <span class="req">required</span></div>
+        <div class="form-row">
+          <div class="form-field"><label>GivenName</label><input type="text" id="ad-fn" placeholder="Jean" oninput="genAD()"></div>
+          <div class="form-field"><label>Surname</label><input type="text" id="ad-sn" placeholder="Dupont" oninput="genAD()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>SamAccountName</label><input type="text" id="ad-sam" placeholder="j.dupont" oninput="genAD()"></div>
+          <div class="form-field"><label>DisplayName</label><input type="text" id="ad-dn" placeholder="Jean Dupont" oninput="genAD()"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-section-label">// Identifiants</div>
+        <div class="form-row">
+          <div class="form-field full"><label>UserPrincipalName</label><input type="text" id="ad-upn" placeholder="j.dupont@domaine.local" oninput="genAD()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field full"><label>AccountPassword</label><input type="text" id="ad-pwd" placeholder="P@ssw0rd!" oninput="genAD()"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-section-label">// Localisation AD</div>
+        <div class="form-row">
+          <div class="form-field full"><label>Path (OU)</label><input type="text" id="ad-path" placeholder="OU=Utilisateurs,DC=domaine,DC=local" oninput="genAD()"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-section-label fr">// Informations professionnelles</div>
+        <div class="form-section-label en" style="display:none">// Professional info</div>
+        <div class="form-row">
+          <div class="form-field"><label>EmailAddress</label><input type="text" id="ad-email" placeholder="jean.dupont@domaine.local" oninput="genAD()"></div>
+          <div class="form-field"><label>Title</label><input type="text" id="ad-title" placeholder="Ingénieur réseau" oninput="genAD()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>Department</label><input type="text" id="ad-dept" placeholder="IT" oninput="genAD()"></div>
+          <div class="form-field"><label>Company</label><input type="text" id="ad-company" placeholder="Acme Corp" oninput="genAD()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>Office</label><input type="text" id="ad-office" placeholder="Paris" oninput="genAD()"></div>
+          <div class="form-field"><label>OfficePhone</label><input type="text" id="ad-phone" placeholder="+33 1 23 45 67 89" oninput="genAD()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>MobilePhone</label><input type="text" id="ad-mobile" placeholder="+33 6 00 00 00 00" oninput="genAD()"></div>
+          <div class="form-field"><label>Description</label><input type="text" id="ad-desc" placeholder="Compte créé via script" oninput="genAD()"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-section-label fr">// Options</div>
+        <div class="form-section-label en" style="display:none">// Options</div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="fr">Compte activé</label>
+            <label class="en" style="display:none">Enabled</label>
+            <select id="ad-enabled" onchange="genAD()">
+              <option value="$true">$true</option>
+              <option value="$false">$false</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="fr">Changer MDP à la connexion</label>
+            <label class="en" style="display:none">Change password at logon</label>
+            <select id="ad-changepwd" onchange="genAD()">
+              <option value="$false">$false</option>
+              <option value="$true">$true</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="fr">MDP n'expire jamais</label>
+            <label class="en" style="display:none">Password never expires</label>
+            <select id="ad-pwdnever" onchange="genAD()">
+              <option value="$false">$false</option>
+              <option value="$true">$true</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-output-header">
+      <span class="fr">// Commande générée</span>
+      <span class="en" style="display:none">// Generated command</span>
+      <button class="copy-btn" id="copy-btn" onclick="copyAD()">
+        <span class="fr">Copier</span>
+        <span class="en" style="display:none">Copy</span>
+      </button>
+      <button class="copy-btn" onclick="resetAD()" style="margin-left:4px">
+        <span class="fr">Réinitialiser</span>
+        <span class="en" style="display:none">Reset</span>
+      </button>
+    </div>
+    <pre class="tool-code" id="ad-output"></pre>
+  </div>
+</section>
+
 <footer>
   <span>cedric-ribier</span> · Caen, France · TSSR 2026
 </footer>
@@ -998,7 +1312,87 @@ function type() {
   }
   setTimeout(type, deleting ? 40 : 70);
 }
-type();
+
+// Outil tabs
+function switchTab(id) {
+  document.querySelectorAll('.tool-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('.tool-tab').classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+switchTab('new-aduser');
+
+// Générateur New-ADUser
+function gv(id){ return document.getElementById(id).value.trim(); }
+
+function genAD(){
+  const fn=gv('ad-fn'), sn=gv('ad-sn'), sam=gv('ad-sam'), dn=gv('ad-dn'),
+        upn=gv('ad-upn'), pwd=gv('ad-pwd'), path=gv('ad-path'),
+        email=gv('ad-email'), title=gv('ad-title'), dept=gv('ad-dept'),
+        company=gv('ad-company'), office=gv('ad-office'), phone=gv('ad-phone'),
+        mobile=gv('ad-mobile'), desc=gv('ad-desc'),
+        enabled=gv('ad-enabled'), changepwd=gv('ad-changepwd'), pwdnever=gv('ad-pwdnever');
+
+  const name = (fn && sn) ? fn+' '+sn : (sam || 'NouvelUtilisateur');
+
+  const lines = [
+    [`New-ADUser`, 'cmd'],
+    [`    -Name "${name}"`, 'param'],
+    fn      ? [`    -GivenName "${fn}"`, 'param'] : null,
+    sn      ? [`    -Surname "${sn}"`, 'param'] : null,
+    sam     ? [`    -SamAccountName "${sam}"`, 'param'] : null,
+    dn      ? [`    -DisplayName "${dn}"`, 'param'] : null,
+    upn     ? [`    -UserPrincipalName "${upn}"`, 'param'] : null,
+    path    ? [`    -Path "${path}"`, 'param'] : null,
+    pwd     ? [`    -AccountPassword (ConvertTo-SecureString "${pwd}" -AsPlainText -Force)`, 'fn'] : null,
+    email   ? [`    -EmailAddress "${email}"`, 'param'] : null,
+    title   ? [`    -Title "${title}"`, 'param'] : null,
+    dept    ? [`    -Department "${dept}"`, 'param'] : null,
+    company ? [`    -Company "${company}"`, 'param'] : null,
+    office  ? [`    -Office "${office}"`, 'param'] : null,
+    phone   ? [`    -OfficePhone "${phone}"`, 'param'] : null,
+    mobile  ? [`    -MobilePhone "${mobile}"`, 'param'] : null,
+    desc    ? [`    -Description "${desc}"`, 'param'] : null,
+    [`    -Enabled ${enabled}`, 'param'],
+    [`    -ChangePasswordAtLogon ${changepwd}`, 'param'],
+    [`    -PasswordNeverExpires ${pwdnever}`, 'param'],
+  ].filter(Boolean);
+
+  window._adCode = lines.map(([l], i, arr) =>
+    i < arr.length - 1 ? l + ' `' : l
+  ).join('\n');
+
+  const html = lines.map(([l, type], i, arr) => {
+    const suffix = i < arr.length - 1 ? ' `' : '';
+    const escaped = l.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if (type === 'cmd') return `<span class="ps-cmd">${escaped}</span>${suffix}`;
+    if (type === 'fn')  return escaped.replace(/(-\w+)/g, '<span class="ps-param">$1</span>').replace(/(ConvertTo-SecureString)/g,'<span class="ps-fn">$1</span>') + suffix;
+    return escaped.replace(/(-\w+)/g, '<span class="ps-param">$1</span>') + suffix;
+  }).join('\n');
+
+  document.getElementById('ad-output').innerHTML = html;
+}
+
+function copyAD(){
+  if(!window._adCode) return;
+  navigator.clipboard.writeText(window._adCode).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const span = btn.querySelector('.fr') || btn;
+    const orig = span.textContent;
+    span.textContent = 'Copié !';
+    setTimeout(() => { span.textContent = orig; }, 1500);
+  }).catch(()=>{});
+}
+
+function resetAD(){
+  document.querySelectorAll('[id^="ad-"]').forEach(el => {
+    if(el.tagName === 'SELECT') el.selectedIndex = 0;
+    else if(el.tagName === 'INPUT') el.value = '';
+  });
+  genAD();
+}
+
+genAD();
 </script>
 </body>
 </html>
