@@ -3,8 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cédric Ribier — Systèmes & Réseaux</title>
+<title>Cédric Ribier — Technicien Supérieur Systèmes & Réseaux</title>
+<meta name="description" content="Portfolio de Cédric Ribier, technicien supérieur en reconversion IT spécialisé en systèmes, réseaux et sécurité. Labs GNS3, Active Directory, Wazuh SIEM, pfSense.">
+<meta name="author" content="Cédric Ribier">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Cédric Ribier — Systèmes & Réseaux">
+<meta property="og:description" content="Portfolio IT — Administration système, réseaux, sécurité. Labs GNS3, Wazuh, pfSense, PowerShell.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cedric-ribier.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cédric Ribier — Systèmes & Réseaux">
+<meta name="twitter:description" content="Portfolio IT — Administration système, réseaux, sécurité.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0e0a'/><text x='4' y='24' font-family='monospace' font-size='20' fill='%2300ff41'>&#62;_</text></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -18,7 +30,7 @@
   --cyan: #00ffd5;
   --amber: #ffb300;
   --text: #c8d8c8;
-  --text-dim: #6a8a6a;
+  --text-dim: #8aaa8a;
   --border: rgba(0,255,65,0.12);
   --border-bright: rgba(0,255,65,0.3);
   --mono: 'JetBrains Mono', monospace;
@@ -808,6 +820,21 @@ footer span { color: var(--green); }
 .ps-cmd   { color: #fff; font-weight: 500; }
 .ps-fn    { color: var(--amber); }
 
+/* Focus visible pour navigation clavier */
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+.skip-link:focus {
+  position: fixed !important;
+  left: 1rem !important;
+  top: 1rem !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  z-index: 99999 !important;
+}
+
 @media (max-width: 768px) {
   .form-row { flex-direction: column; }
   .form-field.full { flex: 1; }
@@ -821,22 +848,38 @@ footer span { color: var(--green); }
   section { padding: 4rem 1.25rem; }
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Cédric Ribier",
+  "jobTitle": "Technicien Supérieur Systèmes & Réseaux",
+  "url": "https://cedric-ribier.github.io/",
+  "address": { "@type": "PostalAddress", "addressLocality": "Caen", "addressCountry": "FR" },
+  "sameAs": [
+    "https://github.com/cedric-ribier",
+    "https://linkedin.com/in/cédric-ribier-3393b2301"
+  ],
+  "knowsAbout": ["GNS3", "Cisco", "Active Directory", "Wazuh", "pfSense", "PowerShell", "Linux"]
+}
+</script>
 </head>
 <body>
+<a href="#hero" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:-1;background:var(--green);color:var(--bg);padding:8px 16px;font-family:var(--mono);font-size:12px;">Aller au contenu principal</a>
 
-<nav>
-  <div class="nav-logo"><span>~/</span>cedric-ribier</div>
-  <ul class="nav-links">
+<nav aria-label="Navigation principale">
+  <div class="nav-logo" aria-label="Accueil Cédric Ribier"><span>~/</span>cedric-ribier</div>
+  <ul class="nav-links" role="list">
     <li><a href="#competences" data-fr="Compétences" data-en="Skills">Compétences</a></li>
     <li><a href="#projets" data-fr="Projets" data-en="Projects">Projets</a></li>
     <li><a href="#formation" data-fr="Formation" data-en="About">Formation</a></li>
     <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
     <li><a href="#outils" data-fr="Outils" data-en="Tools">Outils</a></li>
   </ul>
-  <button class="lang-toggle" onclick="toggleLang()">EN</button>
+  <button type="button" class="lang-toggle" onclick="toggleLang()" aria-label="Switch language to English">EN</button>
 </nav>
 
-<!-- HERO -->
+<main>
 <section id="hero" style="max-width:100%;padding-top:80px;">
   <div class="hero-grid"></div>
   <div class="hero-content">
@@ -855,10 +898,10 @@ footer span { color: var(--green); }
         <span class="en" style="display:none">View projects</span>
         →
       </a>
-      <a href="https://github.com/cedric-ribier" target="_blank" class="btn btn-secondary">
+      <a href="https://github.com/cedric-ribier" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
         GitHub ↗
       </a>
-      <a href="https://linkedin.com/in/cédric-ribier-3393b2301" target="_blank" class="btn btn-secondary">
+      <a href="https://linkedin.com/in/cédric-ribier-3393b2301" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
         LinkedIn ↗
       </a>
     </div>
@@ -882,7 +925,6 @@ footer span { color: var(--green); }
   </div>
 </section>
 
-<!-- COMPÉTENCES -->
 <section id="competences" class="fade-in">
   <div class="section-header">
     <div class="section-tag fr">Compétences</div>
@@ -983,7 +1025,6 @@ footer span { color: var(--green); }
   </div>
 </section>
 
-<!-- PROJETS -->
 <section id="projets" class="fade-in">
   <div class="section-header">
     <div class="section-tag fr">Projets</div>
@@ -996,7 +1037,7 @@ footer span { color: var(--green); }
   </div>
   <div class="projects-grid">
 
-    <a href="https://github.com/cedric-ribier/lab-gns3-security" target="_blank" class="project-card">
+    <a href="https://github.com/cedric-ribier/lab-gns3-security" target="_blank" rel="noopener noreferrer" class="project-card">
       <div class="project-header">
         <div class="project-name">lab-gns3-security</div>
         <div class="project-status status-wip">
@@ -1018,7 +1059,7 @@ footer span { color: var(--green); }
       <div class="project-arrow">↗</div>
     </a>
 
-    <a href="https://github.com/cedric-ribier/lab-gns3-TSSR" target="_blank" class="project-card">
+    <a href="https://github.com/cedric-ribier/lab-gns3-TSSR" target="_blank" rel="noopener noreferrer" class="project-card">
       <div class="project-header">
         <div class="project-name">lab-gns3-TSSR</div>
         <div class="project-status status-active">
@@ -1040,7 +1081,7 @@ footer span { color: var(--green); }
       <div class="project-arrow">↗</div>
     </a>
 
-    <a href="https://github.com/cedric-ribier/Powershell-scripts" target="_blank" class="project-card">
+    <a href="https://github.com/cedric-ribier/Powershell-scripts" target="_blank" rel="noopener noreferrer" class="project-card">
       <div class="project-header">
         <div class="project-name">Powershell-scripts</div>
         <div class="project-status status-wip">
@@ -1064,7 +1105,6 @@ footer span { color: var(--green); }
   </div>
 </section>
 
-<!-- FORMATION -->
 <section id="formation" class="fade-in">
   <div class="section-header">
     <div class="section-tag fr">Formation</div>
@@ -1130,7 +1170,6 @@ footer span { color: var(--green); }
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact" class="fade-in">
   <div class="section-header">
     <div class="section-tag">Contact</div>
@@ -1141,16 +1180,15 @@ footer span { color: var(--green); }
     <div class="section-line"></div>
   </div>
   <div class="contact-links">
-    <a href="https://github.com/cedric-ribier" target="_blank" class="contact-link">
+    <a href="https://github.com/cedric-ribier" target="_blank" rel="noopener noreferrer" class="contact-link">
       <span class="contact-link-prefix">$</span> github.com/cedric-ribier
     </a>
-    <a href="https://linkedin.com/in/cédric-ribier-3393b2301" target="_blank" class="contact-link">
+    <a href="https://linkedin.com/in/cédric-ribier-3393b2301" target="_blank" rel="noopener noreferrer" class="contact-link">
       <span class="contact-link-prefix">$</span> LinkedIn — Cédric Ribier
     </a>
   </div>
 </section>
 
-<!-- OUTILS -->
 <section id="outils" class="fade-in">
   <div class="section-header">
     <div class="section-tag fr">Outils</div>
@@ -1162,12 +1200,10 @@ footer span { color: var(--green); }
     <div class="section-line"></div>
   </div>
 
-  <!-- Onglets -->
   <div class="tool-tabs">
-    <button class="tool-tab active" onclick="switchTab('new-aduser')">New-ADUser</button>
+    <button type="button" class="tool-tab active" onclick="switchTab('new-aduser')">New-ADUser</button>
   </div>
 
-  <!-- Panneau New-ADUser -->
   <div id="tab-new-aduser" class="tool-panel">
     <div class="tool-desc fr">Génère une commande <code>New-ADUser</code> avec les paramètres dans l'ordre conventionnel. Seuls les champs remplis apparaissent.</div>
     <div class="tool-desc en" style="display:none">Generates a <code>New-ADUser</code> command with parameters in conventional order. Only filled fields appear.</div>
@@ -1259,11 +1295,11 @@ footer span { color: var(--green); }
     <div class="tool-output-header">
       <span class="fr">// Commande générée</span>
       <span class="en" style="display:none">// Generated command</span>
-      <button class="copy-btn" id="copy-btn" onclick="copyAD()">
+      <button type="button" class="copy-btn" id="copy-btn" onclick="copyAD()">
         <span class="fr">Copier</span>
         <span class="en" style="display:none">Copy</span>
       </button>
-      <button class="copy-btn" onclick="resetAD()" style="margin-left:4px">
+      <button type="button" class="copy-btn" onclick="resetAD()" style="margin-left:4px">
         <span class="fr">Réinitialiser</span>
         <span class="en" style="display:none">Reset</span>
       </button>
@@ -1271,10 +1307,24 @@ footer span { color: var(--green); }
     <pre class="tool-code" id="ad-output"></pre>
   </div>
 </section>
+</main>
 
 <footer>
   <span>cedric-ribier</span> · Caen, France · TSSR 2026
+  <br><br>
+  <small style="color:var(--text-dim);font-size:10px;letter-spacing:0.05em;">
+    Ce site ne collecte aucune donnée personnelle et n'utilise pas de cookies de suivi.
+    Hébergé sur GitHub Pages —
+    <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:none;">Politique de confidentialité GitHub</a>.
+    Contact : <a href="https://linkedin.com/in/cédric-ribier-3393b2301" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:none;">LinkedIn</a>
+  </small>
 </footer>
+
+<div id="rgpd-banner" role="dialog" aria-label="Information cookies" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(10,14,10,0.97);border-top:1px solid var(--border-bright);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--text-dim);backdrop-filter:blur(8px);">
+  <span>Ce site est <strong style="color:var(--green)">100% sans cookies</strong> et sans collecte de données personnelles. Hébergé statiquement sur GitHub Pages.</span>
+  <button type="button" onclick="document.getElementById('rgpd-banner').style.display='none';localStorage.setItem('rgpd','ok')" style="background:var(--green);color:var(--bg);border:none;font-family:var(--mono);font-size:11px;padding:6px 16px;cursor:pointer;letter-spacing:0.08em;font-weight:700;white-space:nowrap;">OK, compris</button>
+</div>
+<script>if(localStorage.getItem('rgpd')==='ok')document.getElementById('rgpd-banner').style.display='none';</script>
 
 <script>
 // Lang toggle
@@ -1283,8 +1333,14 @@ function toggleLang() {
   lang = lang === 'fr' ? 'en' : 'fr';
   const btn = document.querySelector('.lang-toggle');
   btn.textContent = lang === 'fr' ? 'EN' : 'FR';
+  btn.setAttribute('aria-label', lang === 'fr' ? 'Switch language to English' : 'Passer en français');
   document.querySelectorAll('.fr').forEach(el => el.style.display = lang === 'fr' ? '' : 'none');
   document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.documentElement.lang = lang;
+  // Update nav links text
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if (a.dataset[lang]) a.textContent = a.dataset[lang];
+  });
 }
 
 // Fade in on scroll
