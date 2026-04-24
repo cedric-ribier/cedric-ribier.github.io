@@ -1213,29 +1213,29 @@ footer span { color: var(--green); }
         <div class="form-section-label fr">// Identité <span class="req">obligatoire</span></div>
         <div class="form-section-label en" style="display:none">// Identity <span class="req">required</span></div>
         <div class="form-row">
-          <div class="form-field"><label>GivenName</label><input type="text" id="ad-fn" placeholder="Jean" oninput="genAD()"></div>
-          <div class="form-field"><label>Surname</label><input type="text" id="ad-sn" placeholder="Dupont" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-fn">GivenName</label><input type="text" id="ad-fn" placeholder="Jean" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-sn">Surname</label><input type="text" id="ad-sn" placeholder="Dupont" oninput="genAD()"></div>
         </div>
         <div class="form-row">
-          <div class="form-field"><label>SamAccountName</label><input type="text" id="ad-sam" placeholder="j.dupont" oninput="genAD()"></div>
-          <div class="form-field"><label>DisplayName</label><input type="text" id="ad-dn" placeholder="Jean Dupont" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-sam">SamAccountName</label><input type="text" id="ad-sam" placeholder="j.dupont" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-dn">DisplayName</label><input type="text" id="ad-dn" placeholder="Jean Dupont" oninput="genAD()"></div>
         </div>
       </div>
 
       <div class="form-group">
         <div class="form-section-label">// Identifiants</div>
         <div class="form-row">
-          <div class="form-field full"><label>UserPrincipalName</label><input type="text" id="ad-upn" placeholder="j.dupont@domaine.local" oninput="genAD()"></div>
+          <div class="form-field full"><label for="ad-upn">UserPrincipalName</label><input type="text" id="ad-upn" placeholder="j.dupont@domaine.local" oninput="genAD()"></div>
         </div>
         <div class="form-row">
-          <div class="form-field full"><label>AccountPassword</label><input type="text" id="ad-pwd" placeholder="P@ssw0rd!" oninput="genAD()"></div>
+          <div class="form-field full"><label for="ad-pwd">AccountPassword</label><input type="text" id="ad-pwd" placeholder="P@ssw0rd!" oninput="genAD()"></div>
         </div>
       </div>
 
       <div class="form-group">
         <div class="form-section-label">// Localisation AD</div>
         <div class="form-row">
-          <div class="form-field full"><label>Path (OU)</label><input type="text" id="ad-path" placeholder="OU=Utilisateurs,DC=domaine,DC=local" oninput="genAD()"></div>
+          <div class="form-field full"><label for="ad-path">Path (OU)</label><input type="text" id="ad-path" placeholder="OU=Utilisateurs,DC=domaine,DC=local" oninput="genAD()"></div>
         </div>
       </div>
 
@@ -1243,20 +1243,20 @@ footer span { color: var(--green); }
         <div class="form-section-label fr">// Informations professionnelles</div>
         <div class="form-section-label en" style="display:none">// Professional info</div>
         <div class="form-row">
-          <div class="form-field"><label>EmailAddress</label><input type="text" id="ad-email" placeholder="jean.dupont@domaine.local" oninput="genAD()"></div>
-          <div class="form-field"><label>Title</label><input type="text" id="ad-title" placeholder="Ingénieur réseau" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-email">EmailAddress</label><input type="text" id="ad-email" placeholder="jean.dupont@domaine.local" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-title">Title</label><input type="text" id="ad-title" placeholder="Ingénieur réseau" oninput="genAD()"></div>
         </div>
         <div class="form-row">
-          <div class="form-field"><label>Department</label><input type="text" id="ad-dept" placeholder="IT" oninput="genAD()"></div>
-          <div class="form-field"><label>Company</label><input type="text" id="ad-company" placeholder="Acme Corp" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-dept">Department</label><input type="text" id="ad-dept" placeholder="IT" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-company">Company</label><input type="text" id="ad-company" placeholder="Acme Corp" oninput="genAD()"></div>
         </div>
         <div class="form-row">
-          <div class="form-field"><label>Office</label><input type="text" id="ad-office" placeholder="Paris" oninput="genAD()"></div>
-          <div class="form-field"><label>OfficePhone</label><input type="text" id="ad-phone" placeholder="+33 1 23 45 67 89" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-office">Office</label><input type="text" id="ad-office" placeholder="Paris" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-phone">OfficePhone</label><input type="text" id="ad-phone" placeholder="+33 1 23 45 67 89" oninput="genAD()"></div>
         </div>
         <div class="form-row">
-          <div class="form-field"><label>MobilePhone</label><input type="text" id="ad-mobile" placeholder="+33 6 00 00 00 00" oninput="genAD()"></div>
-          <div class="form-field"><label>Description</label><input type="text" id="ad-desc" placeholder="Compte créé via script" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-mobile">MobilePhone</label><input type="text" id="ad-mobile" placeholder="+33 6 00 00 00 00" oninput="genAD()"></div>
+          <div class="form-field"><label for="ad-desc">Description</label><input type="text" id="ad-desc" placeholder="Compte créé via script" oninput="genAD()"></div>
         </div>
       </div>
 
@@ -1265,24 +1265,21 @@ footer span { color: var(--green); }
         <div class="form-section-label en" style="display:none">// Options</div>
         <div class="form-row">
           <div class="form-field">
-            <label class="fr">Compte activé</label>
-            <label class="en" style="display:none">Enabled</label>
+            <label for="ad-enabled"><span class="fr">Compte activé</span><span class="en" style="display:none">Enabled</span></label>
             <select id="ad-enabled" onchange="genAD()">
               <option value="$true">$true</option>
               <option value="$false">$false</option>
             </select>
           </div>
           <div class="form-field">
-            <label class="fr">Changer MDP à la connexion</label>
-            <label class="en" style="display:none">Change password at logon</label>
+            <label for="ad-changepwd"><span class="fr">Changer MDP à la connexion</span><span class="en" style="display:none">Change password at logon</span></label>
             <select id="ad-changepwd" onchange="genAD()">
               <option value="$false">$false</option>
               <option value="$true">$true</option>
             </select>
           </div>
           <div class="form-field">
-            <label class="fr">MDP n'expire jamais</label>
-            <label class="en" style="display:none">Password never expires</label>
+            <label for="ad-pwdnever"><span class="fr">MDP n'expire jamais</span><span class="en" style="display:none">Password never expires</span></label>
             <select id="ad-pwdnever" onchange="genAD()">
               <option value="$false">$false</option>
               <option value="$true">$true</option>
