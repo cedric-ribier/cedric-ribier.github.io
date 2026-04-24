@@ -15,11 +15,58 @@
 <meta name="twitter:title" content="Cédric Ribier — Systèmes & Réseaux">
 <meta name="twitter:description" content="Portfolio IT — Administration système, réseaux, sécurité.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0e0a'/><text x='4' y='24' font-family='monospace' font-size='20' fill='%2300ff41'>&#62;_</text></svg>" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Chargement non-bloquant des fonts (évite les 750ms de blocage LCP) -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"></noscript>
+<!-- Fonts auto-hébergées — zéro requête externe, zéro CLS FOUT -->
+<style>
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: optional;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/JetBrainsMono-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: optional;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: optional;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/JetBrainsMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: optional;
+}
+@font-face {
+  font-family: 'Syne';
+  src: url('fonts/Syne-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: optional;
+}
+@font-face {
+  font-family: 'Syne';
+  src: url('fonts/Syne-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: optional;
+}
+@font-face {
+  font-family: 'Syne';
+  src: url('fonts/Syne-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: optional;
+}
+</style>
 <style>
 :root {
   --bg: #0a0e0a;
