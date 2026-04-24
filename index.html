@@ -21,27 +21,6 @@
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"></noscript>
 <style>
-/* Fallbacks métriques ajustés pour réduire le CLS au chargement des fonts */
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: local('Courier New');
-  font-weight: 300 700;
-  size-adjust: 98%;
-  ascent-override: 95%;
-  descent-override: 22%;
-  line-gap-override: 0%;
-}
-@font-face {
-  font-family: 'Syne';
-  src: local('Arial Bold'), local('Helvetica Neue');
-  font-weight: 400 800;
-  size-adjust: 93%;
-  ascent-override: 92%;
-  descent-override: 20%;
-  line-gap-override: 0%;
-}
-</style>
-<style>
 :root {
   --bg: #0a0e0a;
   --bg2: #0f150f;
@@ -182,6 +161,7 @@ nav {
   margin: 0 auto;
   width: 100%;
   position: relative;
+  contain: layout style;
 }
 
 .hero-prompt {
@@ -216,8 +196,6 @@ nav {
   color: #fff;
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
-  /* Réserve l'espace avant chargement de Syne — évite le CLS */
-  min-height: clamp(2.5rem, 6vw, 5rem);
 }
 
 .hero-name .accent { color: var(--green); }
@@ -228,8 +206,9 @@ nav {
   color: var(--green-dim);
   margin-bottom: 2rem;
   letter-spacing: 0.05em;
-  /* Réserve hauteur pour éviter saut au chargement de JetBrains Mono */
-  min-height: 1.7em;
+  /* Hauteur fixe pour éviter le saut du typed effect */
+  height: 2em;
+  overflow: hidden;
 }
 
 .hero-title .cursor {
@@ -649,16 +628,15 @@ footer {
 
 footer span { color: var(--green); }
 
-/* FADE IN */
+/* FADE IN — opacity seul, pas de transform pour éviter le CLS */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.7s ease;
 }
 
 .fade-in.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 /* OUTILS */
