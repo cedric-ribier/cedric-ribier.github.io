@@ -17,7 +17,30 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0e0a'/><text x='4' y='24' font-family='monospace' font-size='20' fill='%2300ff41'>&#62;_</text></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<!-- Chargement non-bloquant des fonts (évite les 750ms de blocage LCP) -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"></noscript>
+<style>
+/* Fallbacks métriques ajustés pour réduire le CLS au chargement des fonts */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('Courier New');
+  font-weight: 300 700;
+  size-adjust: 98%;
+  ascent-override: 95%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Syne';
+  src: local('Arial Bold'), local('Helvetica Neue');
+  font-weight: 400 800;
+  size-adjust: 93%;
+  ascent-override: 92%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+}
+</style>
 <style>
 :root {
   --bg: #0a0e0a;
@@ -193,6 +216,8 @@ nav {
   color: #fff;
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
+  /* Réserve l'espace avant chargement de Syne — évite le CLS */
+  min-height: clamp(2.5rem, 6vw, 5rem);
 }
 
 .hero-name .accent { color: var(--green); }
@@ -203,6 +228,8 @@ nav {
   color: var(--green-dim);
   margin-bottom: 2rem;
   letter-spacing: 0.05em;
+  /* Réserve hauteur pour éviter saut au chargement de JetBrains Mono */
+  min-height: 1.7em;
 }
 
 .hero-title .cursor {
